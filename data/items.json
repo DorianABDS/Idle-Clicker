@@ -1,0 +1,168 @@
+{
+    "items": [
+        {
+            "pickaxe": [
+                {
+                    "wooden_axe": [
+                        {
+                            "nom": "Hache en bois",
+                            "img": "../assets/img/hache-bois.png"
+                        }
+                    ],
+                    "wooden_pickaxe": [
+                        {
+                            "nom": "Pioche en bois",
+                            "img": "../assets/img/pioche-bois.png"
+                        }
+                    ],
+                    "stone_pickaxe": [
+                        {
+                            "nom": "Pioche en pierre",
+                            "img": "../assets/img/pioche-pierre.png"
+                        }
+                    ],
+                    "iron_pickaxe": [
+                        {
+                            "nom": "Pioche en fer",
+                            "img": "../assets/img/pioche-fer.png"
+                        }
+                    ],
+                    "golden_pickaxe": [
+                        {
+                            "nom": "Pioche en or",
+                            "img": "../assets/img/pioche-or.png"
+                        }
+                    ],
+                    "diamond_pickaxe": [
+                        {
+                            "nom": "Pioche en diamant",
+                            "img": "../assets/img/pioche-diamant.png"
+                        }
+                    ],
+                    "emerald_pickaxe": [
+                        {
+                            "nom": "Pioche en émeraude",
+                            "img": "../assets/img/pioche-emeraude.png"
+                        }
+                    ],
+                    "netherite_pickaxe": [
+                        {
+                            "nom": "Pioche en netherite",
+                            "img": "../assets/img/pioche-netherite.png"
+                        }
+                    ],
+                    "enchented_netherite_pickaxe": [
+                        {
+                            "nom": "Pioche en netherite enchantée",
+                            "img": "../assets/img/pioche-enchenté-netherite.png"
+                        }
+                    ]
+                }
+            ],
+            "npc": [
+                {
+                    "villager": [
+                        {
+                            "nom": "Villageois",
+                            "img": "../assets/img/villageois.png"
+                        }
+                    ],
+                    "zombie": [
+                        {
+                            "nom": "Zombie",
+                            "img": "../assets/img/zombie.png"
+                        }
+                    ],
+                    "skeleton": [
+                        {
+                            "nom": "Squelette",
+                            "img": "../assets/img/squelette.png"
+                        }
+                    ],
+                    "endermen": [
+                        {
+                            "nom": "Enderman",
+                            "img": "../assets/img/enderman.png"
+                        }
+                    ],
+                    "whither_skeleton": [
+                        {
+                            "nom": "Wither squelette",
+                            "img": "../assets/img/wither-squelette.png"
+                        }
+                    ],
+                    "wither": [
+                        {
+                            "nom": "Wither",
+                            "img": "../assets/img/wither.png"
+                        }
+                    ],
+                    "ender_dragon": [
+                        {
+                            "nom": "Dragon de l'End",
+                            "img": "../assets/img/dragon-end.png"
+                        }
+                    ]
+                }
+            ],
+            "potion": [
+                {
+                    "water_breathing_potion": [
+                        {
+                            "nom": "Potion de respiration aquatique",
+                            "img": "../assets/img/potion-respiration.png"
+                        }
+                    ],
+                    "fire_resistance_potion": [
+                        {
+                            "nom": "Potion de résistance au feu",
+                            "img": "../assets/img/potion-feu.png"
+                        }
+                    ],
+                    "regeneration_potion": [
+                        {
+                            "nom": "Potion de régénération",
+                            "img": "../assets/img/potion-regeneration.png"
+                        }
+                    ],
+                    "health_potion": [
+                        {
+                            "nom": "Potion de soin",
+                            "img": "../assets/img/potion-soin.png"
+                        }
+                    ],
+                    "invisibility_potion": [
+                        {
+                            "nom": "Potion d'invisibilité",
+                            "img": "../assets/img/potion-invisibilite.png"
+                        }
+                    ],
+                    "leaping_potion": [
+                        {
+                            "nom": "Potion de lévitation",
+                            "img": "../assets/img/potion-levitation.png"
+                        }
+                    ],
+                    "strength_potion": [
+                        {
+                            "nom": "Potion de force",
+                            "img": "../assets/img/potion-force.png"
+                        }
+                    ],
+                    "swiftness_potion": [
+                        {
+                            "nom": "Potion de rapidité",
+                            "img": "../assets/img/potion-rapidite.png"
+                        }
+                    ],
+                    "dragon_breath": [
+                        {
+                            "nom": "Souffle de dragon",
+                            "img": "../assets/img/souffle-dragon.png"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
