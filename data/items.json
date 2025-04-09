@@ -5,102 +5,150 @@
                 {
                     "wooden_axe": [
                         {
-                            "nom": "Hache en bois",
-                            "img": "../assets/img/hache-bois.png"
+                            "name": "Hache en bois",
+                            "description" : "Augmente de 1.3x le nombre de clics",
+                            "img": "../assets/img/hache-bois.png",
+                            "cost": 100,
+                            "bonus_pickaxe": 1.3
                         }
                     ],
                     "wooden_pickaxe": [
                         {
-                            "nom": "Pioche en bois",
-                            "img": "../assets/img/pioche-bois.png"
+                            "name": "Pioche en bois",
+                            "description" : "Augmente de 2x le nombre de clics",
+                            "img": "../assets/img/pioche-bois.png",
+                            "cost": 250,
+                            "bonus_pickaxe": 2
                         }
                     ],
                     "stone_pickaxe": [
                         {
-                            "nom": "Pioche en pierre",
-                            "img": "../assets/img/pioche-pierre.png"
+                            "name": "Pioche en pierre",
+                            "description" : "Augmente de 1.2x le nombre de clics",
+                            "img": "../assets/img/pioche-pierre.png",
+                            "cost": 750,
+                            "bonus_pickaxe": 1.2
                         }
                     ],
                     "iron_pickaxe": [
                         {
-                            "nom": "Pioche en fer",
-                            "img": "../assets/img/pioche-fer.png"
+                            "name": "Pioche en fer",
+                            "description" : "Augmente de 1.5x le nombre de clics",
+                            "img": "../assets/img/pioche-fer.png",
+                            "cost": 1000,
+                            "bonus_pickaxe": 1.5
                         }
                     ],
                     "golden_pickaxe": [
                         {
-                            "nom": "Pioche en or",
-                            "img": "../assets/img/pioche-or.png"
+                            "name": "Pioche en or",
+                            "description" : "Augmente de 3x le nombre de clics",
+                            "img": "../assets/img/pioche-or.png",
+                            "cost": 1500,
+                            "bonus_pickaxe": 3
                         }
                     ],
                     "diamond_pickaxe": [
                         {
-                            "nom": "Pioche en diamant",
-                            "img": "../assets/img/pioche-diamant.png"
+                            "name": "Pioche en diamant",
+                            "description" : "Augmente de 2x le nombre de clics",
+                            "img": "../assets/img/pioche-diamant.png",
+                            "cost": 3000,
+                            "bonus_pickaxe": 2
                         }
                     ],
                     "emerald_pickaxe": [
                         {
-                            "nom": "Pioche en émeraude",
-                            "img": "../assets/img/pioche-emeraude.png"
+                            "name": "Pioche en émeraude",
+                            "description" : "Augmente de 2.5x le nombre de clics",
+                            "img": "../assets/img/pioche-emeraude.png",
+                            "cost": 7000,
+                            "bonus_pickaxe": 2.5
                         }
                     ],
                     "netherite_pickaxe": [
                         {
-                            "nom": "Pioche en netherite",
-                            "img": "../assets/img/pioche-netherite.png"
+                            "name": "Pioche en netherite",
+                            "description" : "Augmente de 3x le nombre de clics",
+                            "img": "../assets/img/pioche-netherite.png",
+                            "cost": 10000,
+                            "bonus_pickaxe": 3
                         }
                     ],
                     "enchented_netherite_pickaxe": [
                         {
-                            "nom": "Pioche en netherite enchantée",
-                            "img": "../assets/img/pioche-enchenté-netherite.png"
+                            "name": "Pioche en netherite enchantée",
+                            "description" : "Augmente de 5x le nombre de clics",
+                            "img": "../assets/img/pioche-enchenté-netherite.png",
+                            "cost": 100000,
+                            "bonus_pickaxe": 5
                         }
                     ]
                 }
             ],
-            "npc": [
+            "png": [
                 {
                     "villager": [
                         {
-                            "nom": "Villageois",
-                            "img": "../assets/img/villageois.png"
+                            "name": "Villageois",
+                            "description":"Ajoute 1 clic automatique par seconde.",
+                            "img": "../assets/img/villageois.png",
+                            "cost": 150,
+                            "bonus_auto_click": 1
                         }
                     ],
                     "zombie": [
                         {
-                            "nom": "Zombie",
-                            "img": "../assets/img/zombie.png"
+                            "name": "Zombie",
+                            "description":"Ajoute 3 clics automatiques par seconde.",
+                            "img": "../assets/img/zombie.png",
+                            "cost": 500,
+                            "bonus_auto_click": 3
                         }
                     ],
                     "skeleton": [
                         {
-                            "nom": "Squelette",
-                            "img": "../assets/img/squelette.png"
+                            "name": "Squelette",
+                            "description":"Ajoute 10 clics automatiques par seconde.",
+                            "img": "../assets/img/squelette.png",
+                            "cost": 1200,
+                            "bonus_auto_click": 10
                         }
                     ],
                     "endermen": [
                         {
-                            "nom": "Enderman",
-                            "img": "../assets/img/enderman.png"
+                            "name": "Enderman",
+                            "description":"Ajoute 50 clics automatiques par seconde.",
+                            "img": "../assets/img/enderman.png",
+                            "cost": 3000,
+                            "bonus_auto_click": 50
                         }
                     ],
                     "whither_skeleton": [
                         {
-                            "nom": "Wither squelette",
-                            "img": "../assets/img/wither-squelette.png"
-                        }
-                    ],
-                    "wither": [
-                        {
-                            "nom": "Wither",
-                            "img": "../assets/img/wither.png"
+                            "name": "Wither squelette",
+                            "description":"Ajoute 100 clics automatiques par seconde.",
+                            "img": "../assets/img/wither-squelette.png",
+                            "cost": 7000,
+                            "bonus_auto_click": 100
                         }
                     ],
                     "ender_dragon": [
                         {
-                            "nom": "Dragon de l'End",
-                            "img": "../assets/img/dragon-end.png"
+                            "name": "Dragon de l'End",
+                            "description":"Ajoute 500 clics automatiques par seconde.",
+                            "img": "../assets/img/dragon-end.png",
+                            "cost": 10000,
+                            "bonus_auto_click": 500
+                        }
+                    ],
+                    "wither": [
+                        {
+                            "name": "Wither",
+                            "description":"Ajoute 1000 clics automatiques par seconde.",
+                            "img": "../assets/img/wither.png",
+                            "cost": 17500,
+                            "bonus_auto_click": 1000
                         }
                     ]
                 }
@@ -109,56 +157,92 @@
                 {
                     "water_breathing_potion": [
                         {
-                            "nom": "Potion de respiration aquatique",
-                            "img": "../assets/img/potion-respiration.png"
+                            "name": "Potion de respiration aquatique",
+                            "description": "Ajoute +200 clics automatiques par seconde pendant 30s.",
+                            "img": "../assets/img/potion-respiration.png",
+                            "cost": 4500,
+                            "cooldown": 30,
+                            "bonus": 200
                         }
                     ],
                     "fire_resistance_potion": [
                         {
-                            "nom": "Potion de résistance au feu",
-                            "img": "../assets/img/potion-feu.png"
+                            "name": "Potion de résistance au feu",
+                            "description": "Multiplie par 3 le nombre de click manuel pendant 40s.",
+                            "img": "../assets/img/potion-feu.png",
+                            "cost": 7500,
+                            "cooldown": 40,
+                            "bonus": 3
                         }
                     ],
                     "regeneration_potion": [
                         {
-                            "nom": "Potion de régénération",
-                            "img": "../assets/img/potion-regeneration.png"
+                            "name": "Potion de régénération",
+                            "description": "Ajoute +75 clics automatiques par seconde pendant 1 minutes.",
+                            "img": "../assets/img/potion-regeneration.png",
+                            "cost": 2500,
+                            "cooldown": 60,
+                            "bonus": 75
                         }
                     ],
                     "health_potion": [
                         {
-                            "nom": "Potion de soin",
-                            "img": "../assets/img/potion-soin.png"
+                            "name": "Potion de soin",
+                            "description": "Récupère instantanément 50% de la progression du niveau actuel.",
+                            "img": "../assets/img/potion-soin.png",
+                            "cost": 15000,
+                            "cooldown" : 180,
+                            "bonus": 50
                         }
                     ],
                     "invisibility_potion": [
                         {
-                            "nom": "Potion d'invisibilité",
-                            "img": "../assets/img/potion-invisibilite.png"
+                            "name": "Potion d'invisibilité",
+                            "description": "multiplie par 2 le nombre de clics automatique pendant 30s",
+                            "img": "../assets/img/potion-invisibilite.png",
+                            "cost": 8000,
+                            "cooldown": 30,
+                            "bonus": 2
                         }
                     ],
                     "leaping_potion": [
                         {
-                            "nom": "Potion de lévitation",
-                            "img": "../assets/img/potion-levitation.png"
+                            "name": "Potion de lévitation",
+                            "description": "Ajoute 1000 clics manuel pendant 10s",
+                            "img": "../assets/img/potion-levitation.png",
+                            "cost": 7500,
+                            "cooldown": 10,
+                            "bonus": 1000
                         }
                     ],
                     "strength_potion": [
                         {
-                            "nom": "Potion de force",
-                            "img": "../assets/img/potion-force.png"
+                            "name": "Potion de force",
+                            "description": "Multiplie par 2 la puissance des clics manuels pendant 40s.",
+                            "img": "../assets/img/potion-force.png",
+                            "cost": 10000,
+                            "cooldown": 40,
+                            "bonus": 2
                         }
                     ],
                     "swiftness_potion": [
                         {
-                            "nom": "Potion de rapidité",
-                            "img": "../assets/img/potion-rapidite.png"
+                            "name": "Potion de rapidité",
+                            "description": "Multiplie par 2 la puissance des clics automatique pendant 10 secondes",
+                            "img": "../assets/img/potion-rapidite.png",
+                            "cost": 3000,
+                            "cooldown": 15,
+                            "bonus": 50
                         }
                     ],
                     "dragon_breath": [
                         {
-                            "nom": "Souffle de dragon",
-                            "img": "../assets/img/souffle-dragon.png"
+                            "name": "Souffle de dragon",
+                            "description": "Active un boost ultime de 10x sur tous les clics pendant 1 minute.",
+                            "img": "../assets/img/souffle-dragon.png",
+                            "cost": 10000000000,
+                            "cooldown": 60,
+                            "bonus": 10
                         }
                     ]
                 }
