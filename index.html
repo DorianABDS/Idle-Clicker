@@ -42,17 +42,21 @@
     <!-- Contenu principal du jeu -->
     <main>
         <!-- Section des blocs à miner -->
-        <section id="block-section">
-            <img src="/assets/img/herbe-wall.png" alt="Image d'herbe" style="display: block;">
-            <img src="/assets/img/stone-wall.png" alt="Image de pierre" style="display: none;">
-            <img src="/assets/img/deepslate-wall.png" alt="Image de la pierre des abysses" style="display: none;">
-            <img src="/assets/img/portail-nether.png" alt="Image du portail du nether" style="display: none;">
-        </section>
-        <!-- Section principale -->
-        <section id="main-section">
-            <img src="/assets/img/table-craft.png" alt="Image de la table de craft" style="display: block;">
-            <img src="/assets/img/village.png" alt="Image d'un village" style="display: none;">
-            <img src="/assets/img/Alambic.png" alt="Image d'un alambic" style="display: none;">
+         <section id="main-container">
+            <div id="block-section">
+                <div id="background-block-section" class="block-section-img">
+                    <img src="/assets/img/herbe-wall.png" alt="Image d'herbe" class="block-section-img" style="display: block;">
+                    <img src="/assets/img/stone-wall.png" alt="Image de pierre" class="block-section-img" style="display: none;">
+                    <img src="/assets/img/deepslate-wall.png" alt="Image de la pierre des abysses" class="block-section-img" style="display: none;">
+                    <img src="/assets/img/portail-nether.png" alt="Image du portail du nether" class="block-section-img" style="display: none;">
+                </div>
+            </div>
+            <!-- Section principale -->
+            <div id="main-section" class="main-section">
+                <img src="/assets/img/table-craft.png" alt="Image de la table de craft" class="main-section-img" style="display: block;">
+                <img src="/assets/img/village.png" alt="Image d'un village" class="main-section-img" style="display: none;">
+                <img src="/assets/img/Alambic.png" alt="Image d'un alambic" class="main-section-img" style="display: none;">
+            </div>
         </section>
     </main>
 </body>
