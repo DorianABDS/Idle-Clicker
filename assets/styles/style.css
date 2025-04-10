@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'MinecraftRegular';
+    src: url('/assets/font/MinecraftRegular-Bmg3.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 .navbar ul {
     display: flex;
     position: absolute;
@@ -77,16 +84,22 @@
 #points-display{
     position: absolute;
     z-index: 10000;
+    font-family: 'MinecraftRegular', cursive;
     color: white;
     font-size: 3em;
-    top: 25%;
-    left: 25%;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    top: 25%;
+    width: 100%;
+    align-items: center;
+    background-color: #0000005f;
+    padding: 15px 0 ;
 }
 
 .gif-emerald{
     height: auto;
-    width: 30%;
+    width: 15%;
 }
 
 .block{
@@ -144,4 +157,36 @@
         height: 10%;
         width: auto;
     }
+}
+
+.titre-bg{
+    position: absolute;
+    z-index: 100000;
+    top: 10%;
+    left: 15%;
+}
+
+.titre{
+    color: white;
+    font-family: 'MinecraftRegular', cursive;
+    font-size: 50px;
+    background-color: #0000005f;
+    padding: 0.3em 1.5em;
+    border-radius: 100px;
+}
+
+.nom-block{
+    position: absolute;
+    z-index: 100000;
+    top: 80%;
+    left: 20%;
+}
+
+.h1-nom-block{
+    color: white;
+    font-family: 'MinecraftRegular', cursive;
+    font-size: 50px;
+    background-color: #0000005f;
+    padding: 0.3em 1.5em;
+    border-radius: 100px;
 }
