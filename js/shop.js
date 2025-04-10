@@ -99,3 +99,15 @@ function buyUpgrade(name) {
     upgrade.cost = Math.floor(upgrade.cost * 1.3)
     updateUI()
 }
+
+// Activation d'une potion avec bonus temporaire
+function activatePotion(potion) {
+    potion.active = true
+    autoClickPower += potion.autoBonus
+
+    setTimeout(() => {
+        autoClickPower -= potion.autoBonus
+        potion.active = false
+        updateUI()
+    }, potion.cooldown * 1000)
+}
