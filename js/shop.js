@@ -130,3 +130,9 @@ function renderShop() {
         shopDiv.appendChild(btn)
     })
 }
+
+// Mise à jour de l'affichage
+function updateUI() {
+    document.getElementById('points').textContent = `Points : ${Math.floor(points)}`
+    renderShop()
+}
