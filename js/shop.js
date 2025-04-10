@@ -136,3 +136,9 @@ function updateUI() {
     document.getElementById('points').textContent = `Points : ${Math.floor(points)}`
     renderShop()
 }
+
+// Boucle automatique de gain de points
+setInterval(() => {
+    points += autoClickPower
+    updateUI()
+}, 1000)
