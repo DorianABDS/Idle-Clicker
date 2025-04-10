@@ -111,3 +111,22 @@ function activatePotion(potion) {
         updateUI()
     }, potion.cooldown * 1000)
 }
+
+// Affichage des items de la boutique
+function renderShop() {
+    const shopDiv = document.getElementById("shop")
+    shopDiv.innerHTML = ""
+
+    const upgrades = categories[currentCategory]
+    upgrades.forEach(upgrade => {
+        const btn = document.createElement("button")
+        let bonusText = currentCategory === 'pickaxe'
+            ? `+${upgrade.bonus} clic, +${upgrade.autoBonus.toFixed(1)} auto`
+            : currentCategory === 'npc'
+                ? `Unique achat - ${upgrade.cost} pts`
+                : `+${upgrade.bonus} auto temporaire (${upgrade.cooldown}s)`
+        btn.textContent = `${upgrade.name} (${bonusText}) - ${upgrade.cost} pts [x${upgrade.quantity}]`
+        btn.onclick = () => buyUpgrade(upgrade.name)
+        shopDiv.appendChild(btn)
+    })
+}
