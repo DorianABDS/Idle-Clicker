@@ -2,59 +2,73 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idle Clicker</title>
-    <!-- Importation des fichiers CSS -->
-    <link rel="stylesheet" href="/assets/styles/style.css">
-    <link rel="stylesheet" href="/assets/styles/reset.css">
-    <!-- Importation des fichiers JavaScript -->
-    <script defer src="/js/clicker.js"></script>       <!-- Gère la logique des clics -->
-    <script defer src="/js/gameState.js"></script>     <!-- Gère l'état du jeu et la sauvegarde -->
-    <script defer src="/js/main.js"></script>          <!-- Point d'entrée principal du jeu -->
-    <script defer src="/js/resources.js"></script>     <!-- Gestion des ressources -->
-    <script defer src="/js/shop.js"></script>          <!-- Boutique et améliorations -->
-    <script defer src="/js/ui.js"></script>            <!-- Interface utilisateur -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Idle Clicker</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/styles/reset.css" />
+  <link rel="stylesheet" href="/assets/styles/style.css" />
+  <!-- JavaScript -->
+  <script defer src="/js/clicker.js"></script>
+  <script defer src="/js/gameState.js"></script>
+  <script defer src="/js/main.js"></script>
+  <script defer src="/js/resources.js"></script>
+  <script defer src="/js/shop.js"></script>
+  <script defer src="/js/ui.js"></script>
 </head>
 
 <body>
-    <!-- Barre de navigation -->
-    <nav class="navbar">
-        <ul>
-            <!-- Onglet Pioche -->
-            <li>
-                <img src="/assets/img/pioche-diamant.png" alt="Pioche">
-                <img src="/assets/img/pagination_minecraft.png" alt="background-gris">
-            </li>
-            <!-- Onglet Villageois -->
-            <li>
-                <img src="/assets/img/villageois.png" alt="Villageois">
-                <img src="/assets/img/pagination_minecraft.png" alt="background-gris">
-            </li>
-            <!-- Onglet Potion -->
-            <li>
-                <img src="/assets/img/eau.png" alt="Potion">
-                <img src="/assets/img/pagination_minecraft.png" alt="background-gris">
-            </li>
-        </ul>
-    </nav>
+  <!-- Navigation entre les catégories -->
+  <nav class="navbar">
+    <ul>
+      <!-- Onglet Pioche -->
+      <li id="tab-pickaxe">
+        <img src="/assets/img/pioche-diamant.png" alt="Pioche" />
+        <img src="/assets/img/pagination_minecraft.png" alt="fond" />
+      </li>
+      <!-- Onglet Villageois -->
+      <li id="tab-npc">
+        <img src="/assets/img/villageois.png" alt="Villageois" />
+        <img src="/assets/img/pagination_minecraft.png" alt="fond" />
+      </li>
+      <!-- Onglet Potion -->
+      <li id="tab-potion">
+        <img src="/assets/img/eau.png" alt="Potion" />
+        <img src="/assets/img/pagination_minecraft.png" alt="fond" />
+      </li>
+    </ul>
+  </nav>
 
-    <!-- Contenu principal du jeu -->
-    <main>
-        <!-- Section des blocs à miner -->
-        <section id="block-section">
-            <img src="/assets/img/herbe-wall.png" alt="Image d'herbe" style="display: block;">
-            <img src="/assets/img/stone-wall.png" alt="Image de pierre" style="display: none;">
-            <img src="/assets/img/deepslate-wall.png" alt="Image de la pierre des abysses" style="display: none;">
-            <img src="/assets/img/portail-nether.png" alt="Image du portail du nether" style="display: none;">
-        </section>
-        <!-- Section principale -->
-        <section id="main-section">
-            <img src="/assets/img/table-craft.png" alt="Image de la table de craft" style="display: block;">
-            <img src="/assets/img/village.png" alt="Image d'un village" style="display: none;">
-            <img src="/assets/img/Alambic.png" alt="Image d'un alambic" style="display: none;">
-        </section>
-    </main>
+  <!-- Contenu principal -->
+  <main>
+    <!-- Blocs minables -->
+    <section id="block-section">
+      <img src="/assets/img/herbe-wall.png" alt="Herbe" style="display: block;" />
+      <img src="/assets/img/stone-wall.png" alt="Pierre" style="display: none;" />
+      <img src="/assets/img/deepslate-wall.png" alt="Abysses" style="display: none;" />
+      <img src="/assets/img/portail-nether.png" alt="Nether" style="display: none;" />
+    </section>
+
+    <!-- Section principale du jeu -->
+    <section id="main-section">
+      <!-- Images contextuelles -->
+      <img src="/assets/img/table-craft.png" alt="Table de craft" style="display: block;" />
+      <img src="/assets/img/village.png" alt="Village" style="display: none;" />
+      <img src="/assets/img/Alambic.png" alt="Alambic" style="display: none;" />
+
+      <!-- Affichage des points -->
+      <div id="points" style="margin: 20px; font-size: 1.5rem; font-weight: bold;">
+        Points : 0
+      </div>
+
+      <!-- Affichage des potions actives -->
+      <div id="active-potions" style="margin: 20px; font-size: 1.2rem;">
+      </div>
+
+      <!-- Boutique dynamique -->
+      <div id="shop"></div>
+    </section>
+  </main>
 </body>
 
 </html>
