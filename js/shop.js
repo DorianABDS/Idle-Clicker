@@ -60,6 +60,7 @@ fetch('/data/items.json')
 
         renderShop()
         updateUI()
+        loadShop()
     })
     .catch(error => console.error('Erreur du chargement du JSON', error))
 
@@ -98,6 +99,7 @@ function buyUpgrade(name) {
     // Augmentation du coût à chaque achat
     upgrade.cost = Math.floor(upgrade.cost * 1.3)
     updateUI()
+    saveShop()
 }
 
 // Activation d'une potion avec bonus temporaire
@@ -142,3 +144,25 @@ setInterval(() => {
     points += autoClickPower
     updateUI()
 }, 1000)
+// Enregistrer le shop dans le localstorage
+
+function saveShop() {
+    const dataToSave = {
+        categorie,
+        points,
+        clickPower,
+        autoClickPower
+    }
+    saveGameState(dataToSave)
+}
+
+function loadShop() {
+    const save = loadGameState()
+    if (save) {
+        categories = save.categorie
+        points = save.points
+        clickPower = save.clickPower
+        autoClickPower = save.autoClickPower
+        updateUI()
+    }
+}
