@@ -10,7 +10,11 @@
     position: absolute;
     right: 0;
     top: 0;
+}
 
+.navbar ul {
+    display: flex;
+    justify-content: flex-end;
 
     li {
         position: relative;
