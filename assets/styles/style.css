@@ -35,6 +35,10 @@
         z-index: 1;
     }
 }
+.navbar ul li img:last-child {
+    z-index: 1;
+}
+
 #main-container {
     display: flex;
     width: 100%;
