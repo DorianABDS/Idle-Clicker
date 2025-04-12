@@ -23,6 +23,14 @@ function loadGameState() {
     return getFromLocalStorage('gameSave')
 }
 
+export function saveGameStateClicker(state) {
+    saveToLocalStorage('clickerGameStateClicker', state); 
+}
+
+export function loadGameStateClicker() {
+    return getFromLocalStorage('clickerGameStateClicker');
+}
+
 // Rend ces fonctions accessibles globalement pour pouvoir les utiliser ailleurs
 window.saveToLocalStorage = saveToLocalStorage
 window.getFromLocalStorage = getFromLocalStorage
