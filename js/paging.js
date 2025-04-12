@@ -1,92 +1,83 @@
-/* -----pagination----- */
-let tabPickaxe = document.querySelector(".pickaxe-tab");
-let tabMob = document.querySelector(".mob-tab");
-let tabPotion = document.querySelector(".potion-tab");
+document.addEventListener('DOMContentLoaded', function () {
+    console.clear();
+    console.log("Script de pagination démarré");
 
-/*----- bonus -----*/
-let pickaxePage = document.querySelector(".craft-table-bonus");
-let mobPage = document.querySelector(".vilage-bonus");
-let potionPage = document.querySelector(".potion-bonus");
+    // Sélection des onglets
+    const pickaxeTab = document.getElementById('pickaxe-tab');
+    const mobTab = document.getElementById('mob-tab');
+    const potionTab = document.getElementById('potion-tab');
 
-/* ----- background ----- */
-let pickaxeBackground = document.querySelector("#craft-table");
-let mobBackground = document.querySelector("#village");
-let potionBackground = document.querySelector("#alambic");
+    // Sélection des images à afficher pour chaque catégorie
+    const craftTableImgs = document.querySelectorAll('.craft-table-bonus img');
+    const villageImgs = document.querySelectorAll('.vilage-bonus img');
+    const potionImgs = document.querySelectorAll('.potion-bonus img');
 
-// Fonction pour réinitialiser l'apparence des onglets
-function resetTabs() {
-    tabPickaxe.classList.remove("tab-active");
-    tabMob.classList.remove("tab-active");
-    tabPotion.classList.remove("tab-active");
-}
+    // Sélection des images de fond
+    const craftTableImg = document.getElementById('craft-table');
+    const villageImg = document.getElementById('village');
+    const alambicImg = document.getElementById('alambic');
 
-document.addEventListener("DOMContentLoaded", function () {
-    tabPickaxe.classList.add("tab-active");
-});
+    // Activer tous les onglets
+    [pickaxeTab, mobTab, potionTab].forEach(tab => tab.classList.add('tab-active'));
 
-tabPickaxe.addEventListener("click", () => {  
+    // Fonction pour masquer une liste d’images
+    function hideImages(imgList) {
+        imgList.forEach(img => img.style.display = 'none');
+    }
 
-    resetTabs();
-    tabPickaxe.classList.add("tab-active");
-    
-    // Changer les contenus
-    pickaxePage.classList.remove("hidden");
-    pickaxePage.classList.add("active");  
-    mobPage.classList.remove("active");
-    mobPage.classList.add("hidden");
-    potionPage.classList.remove("active");
-    potionPage.classList.add("hidden");
+    // Fonction pour afficher une liste d’images
+    function showImages(imgList) {
+        imgList.forEach(img => img.style.display = 'inline-block');
+    }
 
-    // Changer les arrière-plans
-    pickaxeBackground.classList.remove("hidden");
-    pickaxeBackground.classList.add("active");
-    mobBackground.classList.remove("active");
-    mobBackground.classList.add("hidden");
-    potionBackground.classList.remove("active");
-    potionBackground.classList.add("hidden");
-});
+    // Fonction principale d'activation d'un onglet
+    function activateTab(tab, imagesToShow, backgroundImg) {
+        console.log("Activation de l'onglet:", tab.id);
 
-tabMob.addEventListener("click", () => {  
+        // Réinitialise l'effet de zoom sur tous les onglets
+        [pickaxeTab, mobTab, potionTab].forEach(t => {
+            t.style.transform = 'scale(1)';
+            t.style.zIndex = '1';
+        });
 
-   resetTabs();
-    tabMob.classList.add("tab-active");
-    
-    // Changer les contenus
-    pickaxePage.classList.remove("active");
-    pickaxePage.classList.add("hidden");
-    mobPage.classList.remove("hidden");
-    mobPage.classList.add("active");
-    potionPage.classList.remove("active");
-    potionPage.classList.add("hidden");
+        // Zoom l’onglet actif
+        tab.style.transform = 'scale(1.2)';
+        tab.style.zIndex = '10';
 
-    // Changer les arrière-plans
-    pickaxeBackground.classList.remove("active");
-    pickaxeBackground.classList.add("hidden");
-    mobBackground.classList.remove("hidden");
-    mobBackground.classList.add("active");
-    potionBackground.classList.remove("active");
-    potionBackground.classList.add("hidden");
-});
+        // Masquer toutes les images bonus
+        hideImages(craftTableImgs);
+        hideImages(villageImgs);
+        hideImages(potionImgs);
 
-tabPotion.addEventListener("click", () => { 
-    
-     resetTabs();
-    tabPotion.classList.add("tab-active");
+        // Afficher les images liées à l'onglet actif
+        showImages(imagesToShow);
 
-    
-    // Changer les contenus
-    pickaxePage.classList.remove("active");
-    pickaxePage.classList.add("hidden");
-    mobPage.classList.remove("active");
-    mobPage.classList.add("hidden");
-    potionPage.classList.remove("hidden");
-    potionPage.classList.add("active");
+        // Gérer les images de fond
+        craftTableImg.style.display = 'none';
+        villageImg.style.display = 'none';
+        alambicImg.style.display = 'none';
 
-    // Changer les arrière-plans
-    pickaxeBackground.classList.remove("active");
-    pickaxeBackground.classList.add("hidden");
-    mobBackground.classList.remove("active");
-    mobBackground.classList.add("hidden");
-    potionBackground.classList.remove("hidden");
-    potionBackground.classList.add("active");
+        backgroundImg.style.display = 'block';
+    }
+
+    // Écouteurs d’événements sur les onglets
+    pickaxeTab.onclick = function () {
+        console.log("Clic sur onglet Pioche");
+        activateTab(pickaxeTab, craftTableImgs, craftTableImg);
+    };
+
+    mobTab.onclick = function () {
+        console.log("Clic sur onglet Villageois");
+        activateTab(mobTab, villageImgs, villageImg);
+    };
+
+    potionTab.onclick = function () {
+        console.log("Clic sur onglet Potion");
+        activateTab(potionTab, potionImgs, alambicImg);
+    };
+
+    // Onglet pioche activé par défaut
+    activateTab(pickaxeTab, craftTableImgs, craftTableImg);
+
+    console.log("Script de pagination initialisé avec succès");
 });
