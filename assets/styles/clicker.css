@@ -1,0 +1,107 @@
+.click-feedback {
+    position: absolute;
+    color: gold;
+    font-size: 20px;
+    font-weight: bold;
+    pointer-events: none;
+    animation: riseAndFade 1s ease-out;
+    z-index: 1000000000000;
+}
+
+@keyframes riseAndFade {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+.points-display {
+    font-size: 24px;
+    font-weight: bold; 
+    color: rgb(8, 0, 0); 
+    margin: 10px;
+}
+.block-image {
+    transition: transform 0.3s ease;
+}
+
+.block-image.unlocked {
+    animation: pop-in 0.4s ease;
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.special-item {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 2000;
+    cursor: pointer;
+    animation: floaty 0.5s ease-out;
+    user-select: none;
+}
+
+@keyframes floaty {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.feedback-message {
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    color: white;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: feedbackFadeUp 2s ease-out forwards;
+    z-index: 100000000000;
+}
+
+@keyframes feedbackFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+body .special-item {
+    position: absolute;
+    width: 100px;   /* Taille augmentée */
+    height: 100px;  /* Taille augmentée */
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    z-index: 1000000000000;
+    pointer-events: auto; /* Assurer que l'image soit cliquable */
+}

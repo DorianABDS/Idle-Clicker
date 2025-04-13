@@ -8,6 +8,7 @@
     <!-- Importation des fichiers CSS -->
     <link rel="stylesheet" href="/assets/styles/style.css">
     <link rel="stylesheet" href="/assets/styles/reset.css">
+    <link rel="stylesheet" href="/assets/styles/clicker.css">
     <!-- Importation des fichiers JavaScript -->
     <script defer src="/js/clicker.js"></script> <!-- Gère la logique des clics -->
     <script defer src="/js/gameState.js"></script> <!-- Gère l'état du jeu et la sauvegarde -->
@@ -42,6 +43,34 @@
 
     <!-- Contenu principal du jeu -->
     <main>
+        <!-- Musique de fond pour Overworld -->
+        <audio id="overworld-music" loop>
+            <source src="assets/sound/overworld.mp3" type="audio/mp3">
+            Votre navigateur ne supporte pas la balise audio.
+        </audio>
+
+        <!-- Musique de fond pour Cave -->
+        <audio id="cave-music" loop>
+            <source src="assets/sound/cave.mp3" type="audio/mp3">
+            Votre navigateur ne supporte pas la balise audio.
+        </audio>
+
+        <!-- Musique de fond pour Nether -->
+        <audio id="nether-music" loop>
+            <source src="assets/sound/nether.mp3" type="audio/mp3">
+            Votre navigateur ne supporte pas la balise audio.
+        </audio>
+
+        <audio id="click-sound">
+            <source src="assets/sound/break-block.mp3" type="audio/mp3">
+            Votre navigateur ne supporte pas la balise audio.
+        </audio>
+
+        <audio id="level-up-sound">
+            <source src="assets/sound/level-up.mp3" type="audio/mp3">
+            Votre navigateur ne supporte pas la balise audio.
+        </audio>
+
         <!-- Section des blocs à miner -->
         <section id="main-container">
             <div id="block-section" class="point-class">
@@ -51,8 +80,11 @@
                     <h1 class="titre" style="display: none;">Grotte Profonde</h1>
                     <h1 class="titre" style="display: none;">Nether</h1>
                 </div>
-                <div id="points-display">0 <img src="/assets/img/minecraft-emerald-88740_orig.gif"
-                        alt="émeraude minecraft" class="gif-emerald"></div>
+                <div id="points-display-container">
+                    <div id="points-display">0 <img src="/assets/img/minecraft-emerald-88740_orig.gif"
+                            alt="émeraude minecraft" class="gif-emerald"></div>
+                    <div id="points-per-click-display" class="points-per-click-display"></div>
+                </div>
                 <div class="block" id="click-button">
                     <img src="/assets/img/buche.png" alt="Image de la bûche" class="block-image" id="wood-block"
                         style="display: block;">
@@ -88,55 +120,71 @@
                     <h1 class="h1-nom-block" style="display: none;">NETHERITE</h1>
                 </div>
                 <div id="background-block-section" class="block-section-img">
-                    <img src="/assets/img/herbe-wall.png" alt="Image d'herbe" class="block-section-img"
+                    <img src="/assets/img/herbe-wall.png" alt="Image d'herbe" class="block-section-img" id="plains"
                         style="display: block;">
-                    <img src="/assets/img/stone-wall.png" alt="Image de pierre" class="block-section-img"
+                    <img src="/assets/img/stone-wall.png" alt="Image de pierre" class="block-section-img" id="stone"
                         style="display: none;">
-                    <img src="/assets/img/deepslate-wall.png" alt="Image de la pierre des abysses"
+                    <img src="/assets/img/deepslate-wall.png" alt="Image de la pierre des abysses" id="deepslate"
                         class="block-section-img" style="display: none;">
                     <img src="/assets/img/portail-nether.png" alt="Image du portail du nether" class="block-section-img"
-                        style="display: none;">
+                        id="nether-portal" style="display: none;">
                 </div>
             </div>
             <!-- Section principale -->
             <div class="craft-table-bonus">
-                <img src="/assets/img/hache-bois.png" alt="Hache en bois"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">
-                <img src="/assets/img/pioche-bois.png" alt="Pioche en bois"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">
-                <img src="/assets/img/pioche-pierre.png" alt="Pioche en pierre"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">
-                <img src="/assets/img/pioche-fer.png" alt="Pioche en fer"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">
-                <img src="/assets/img/pioche-or.png" alt="Pioche en or"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">
-                <img src="/assets/img/pioche-diamant.png" alt="Pioche en diamant"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">
-                <img src="/assets/img/pioche-emeraude.png" alt="Pioche en émeraude"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">
-                <img src="/assets/img/pioche-netherite.png" alt="Pioche en netherite"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">
-                <img src="/assets/img/pioche-enchenté-netherite.png" alt="Pioche en netherite enchantée"style="display: none; filter: grayscale(100%);" class="img-craft-bonus">                
+                <img src="/assets/img/hache-bois.png" alt="Hache en bois"
+                    style="display: block; filter: grayscale(100%);" class="img-craft-bonus">
+                <img src="/assets/img/pioche-bois.png" alt="Pioche en bois"
+                    style="display: block; filter: grayscale(100%);" class="img-craft-bonus">
+                <img src="/assets/img/pioche-pierre.png" alt="Pioche en pierre"
+                    style="display: block; filter: grayscale(100%);" class="img-craft-bonus">
+                <img src="/assets/img/pioche-fer.png" alt="Pioche en fer"
+                    style="display: block; filter: grayscale(100%);" class="img-craft-bonus">
+                <img src="/assets/img/pioche-or.png" alt="Pioche en or" style="display: block; filter: grayscale(100%);"
+                    class="img-craft-bonus">
+                <img src="/assets/img/pioche-diamant.png" alt="Pioche en diamant"
+                    style="display: block; filter: grayscale(100%);" class="img-craft-bonus">
+                <img src="/assets/img/pioche-emeraude.png" alt="Pioche en émeraude"
+                    style="display: block; filter: grayscale(100%);" class="img-craft-bonus">
+                <img src="/assets/img/pioche-netherite.png" alt="Pioche en netherite"
+                    style="display: block; filter: grayscale(100%);" class="img-craft-bonus">
+                <img src="/assets/img/pioche-enchenté-netherite.png" alt="Pioche en netherite enchantée"
+                    style="display: block; filter: grayscale(100%);" class="img-craft-bonus">
             </div>
             <div class="vilage-bonus">
-                <img src="/assets/img/villageois.png" alt="" class="img-village-bonus" style="filter: grayscale(100%); display: none;">
-                <img src="/assets/img/zombie.png" alt="" class="img-village-bonus" style="filter: grayscale(100%); display: none;">
-                <img src="/assets/img/squelette.png" alt="" class="img-village-bonus" style="filter: grayscale(100%); display: none;">
-                <img src="/assets/img/enderman.png" alt="" class="img-village-bonus" style="filter: grayscale(100%); display: none;">
-                <img src="/assets/img/wither-squelette.png" alt="" class="img-village-bonus" style="filter: grayscale(100%); display: none;">
-                <img src="/assets/img/dragon-end.png" alt="" class="img-village-bonus" style="filter: grayscale(100%); display: none;">
-                <img src="/assets/img/wither.png" alt="" class="img-village-bonus" style="filter: grayscale(100%); display: none;">
+                <img src="/assets/img/villageois.png" alt="" class="img-village-bonus"
+                    style="filter: grayscale(100%); display: none;">
+                <img src="/assets/img/zombie.png" alt="" class="img-village-bonus"
+                    style="filter: grayscale(100%); display: none;">
+                <img src="/assets/img/squelette.png" alt="" class="img-village-bonus"
+                    style="filter: grayscale(100%); display: none;">
+                <img src="/assets/img/enderman.png" alt="" class="img-village-bonus"
+                    style="filter: grayscale(100%); display: none;">
+                <img src="/assets/img/wither-squelette.png" alt="" class="img-village-bonus"
+                    style="filter: grayscale(100%); display: none;">
+                <img src="/assets/img/dragon-end.png" alt="" class="img-village-bonus"
+                    style="filter: grayscale(100%); display: none;">
+                <img src="/assets/img/wither.png" alt="" class="img-village-bonus"
+                    style="filter: grayscale(100%); display: none;">
             </div>
             <div class="potion-bonus">
-                <img src="/assets/img/potion-force.png" alt="" style="display: block;">
-                <img src="/assets/img/potion-feu.png" alt="" style="display: block;">
-                <img src="/assets/img/potion-invisibilite.png" alt="" style="display: block;">
-                <img src="/assets/img/potion-levitation.png" alt="" style="display: block;">
-                <img src="/assets/img/potion-rapidite.png" alt="" style="display: block;">
-                <img src="/assets/img/potion-regeneration.png" alt="" style="display: block;">
-                <img src="/assets/img/potion-respiration.png" alt="" style="display: block;">
-                <img src="/assets/img/potion-soin.png" alt="" style="display: block;">
-                <img src="/assets/img/souffle-dragon.png" alt="" style="display: block;">
+                <img src="/assets/img/potion-force.png" alt="" style="display: none;">
+                <img src="/assets/img/potion-feu.png" alt="" style="display: none;">
+                <img src="/assets/img/potion-invisibilite.png" alt="" style="display: none;">
+                <img src="/assets/img/potion-levitation.png" alt="" style="display: none;">
+                <img src="/assets/img/potion-rapidite.png" alt="" style="display: none;">
+                <img src="/assets/img/potion-regeneration.png" alt="" style="display: none;">
+                <img src="/assets/img/potion-respiration.png" alt="" style="display: none;">
+                <img src="/assets/img/potion-soin.png" alt="" style="display: none;">
+                <img src="/assets/img/souffle-dragon.png" alt="" style="display: none;">
             </div>
             <div id="main-section" class="main-section">
                 <img src="/assets/img/table-craft.png" alt="Image de la table de craft" class="main-section-img"
-                    style="display: none;">
+                    style="display: block;">
                 <img src="/assets/img/village.png" alt="Image d'un village" class="main-section-img"
                     style="display: none;">
                 <img src="/assets/img/Alambic.png" alt="Image d'un alambic" class="main-section-img"
-                    style="display: block;">
+                    style="display: none;">
             </div>
         </section>
     </main>
