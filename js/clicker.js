@@ -9,7 +9,6 @@ let currentMusicLevel = 'overworldMusic';
 const clickSound = document.getElementById('click-sound');
 const levelUpSound = document.getElementById('level-up-sound');
 
-import { saveToLocalStorage, loadFromLocalStorage } from './localStorage.js';
 import { loadGameStateClicker, saveGameStateClicker } from './storage.js';
 
 // Ajuster le volume des sons
@@ -500,7 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Charger la sauvegarde si elle existe
     loadGame();
     
-    // Configurer la sauvegarde automatique
+    // // Configurer la sauvegarde automatique
     setupAutoSave();
     
     function startMusicOnce() {
