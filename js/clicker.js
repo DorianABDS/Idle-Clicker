@@ -81,7 +81,7 @@ const specialItems = [
   {
     id: "creeper",
     src: "/assets/img/creeper.png",
-    chance: 0, // 7% de chance
+    chance: 0.01, // 1% de chance
     onClick: () => {
       // Pas de bonus pour le creeper, juste éviter le malus
     },
