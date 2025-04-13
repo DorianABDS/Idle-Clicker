@@ -2,7 +2,22 @@ let points = 0;
 let currentBlockIndex = 0;
 let currentBackgroundIndex = 0;
 let currentTitleIndex = 0;
-let currentBlockNameIndex = 0; 
+let currentBlockNameIndex = 0;
+let currentMusicLevel = 'overworldMusic';
+
+
+const clickSound = document.getElementById('click-sound');
+const levelUpSound = document.getElementById('level-up-sound');
+
+import { loadGameStateClicker, saveGameStateClicker } from './storage.js';
+
+// Ajuster le volume des sons
+clickSound.volume = 0.3;   // Réduit à 30% du volume
+levelUpSound.volume = 0.15;
+levelUpSound.play();
+setTimeout(() => {
+    levelUpSound.volume = 0.1; // Diminue progressivement
+}, 500);
 
 
 // Liste des blocs avec leur seuil
@@ -48,6 +63,36 @@ const blockNamesList = [
     { name: 'DIAMANT', threshold: 80 },
     { name: 'NETHERITE', threshold: 90 }
 ];
+// Récupérer les éléments audio pour chaque niveau
+const overworldMusic = document.getElementById('overworld-music');
+const caveMusic = document.getElementById('cave-music');
+const netherMusic = document.getElementById('nether-music');
+
+function changeMusic() {
+    if (points >= 90 && currentMusicLevel !== 'nether') {
+        // Si le joueur a 90 points ou plus et que la musique n'est pas déjà celle du Nether
+        overworldMusic.pause();  // Pause la musique de l'Overworld
+        caveMusic.pause();       // Pause la musique de la Cave
+        netherMusic.currentTime = 0;  // Remettre la musique du Nether au début
+        netherMusic.play();      // Démarrer la musique du Nether
+        currentMusicLevel = 'nether';  // Mettre à jour le niveau de musique
+    } else if (points >= 20 && points < 90 && currentMusicLevel !== 'cave') {
+        // Si le joueur a entre 20 et 89 points et que la musique n'est pas déjà celle de la Cave
+        overworldMusic.pause();  // Pause la musique de l'Overworld
+        netherMusic.pause();     // Pause la musique du Nether
+        caveMusic.currentTime = 0;  // Remettre la musique de la Cave au début
+        caveMusic.play();        // Démarrer la musique de la Cave
+        currentMusicLevel = 'cave';  // Mettre à jour le niveau de musique
+    } else if (points < 20 && currentMusicLevel !== 'overworld') {
+        // Si le joueur a moins de 20 points et que la musique n'est pas déjà celle de l'Overworld
+        caveMusic.pause();       // Pause la musique de la Cave
+        netherMusic.pause();     // Pause la musique du Nether
+        overworldMusic.currentTime = 0;  // Remettre la musique de l'Overworld au début
+        overworldMusic.play();   // Démarrer la musique de l'Overworld
+        currentMusicLevel = 'overworld';  // Mettre à jour le niveau de musique
+    }
+}
+
 
 
 // Liste des items spéciaux (bonus et malus)
@@ -81,17 +126,92 @@ const specialItems = [
             updatePointsDisplay();
             showFeedbackMessage(`-${pointsToRemove} points !`, 'red');
     
-            // Vérifie le changement de bloc, de fond, de titre et du nom du bloc après la perte de points
-            checkBlockUnlock();
-            checkBackgroundUnlock();
-            checkTitleUnlock();
-            checkBlockNamesUnlock();  // Vérifie le changement du nom du bloc
+            // Re-vérifie le changement de musique après perte de points
+    changeMusic();
+
+    // Vérifie le changement de bloc, de fond, de titre et du nom du bloc après la perte de points
+    checkBlockUnlock();
+    checkBackgroundUnlock();
+    checkTitleUnlock();
+    checkBlockNamesUnlock();  // Vérifie le changement du nom du bloc
         }
     }
     
 ];
 
-// Gère le clic
+// Fonctions pour sauvegarder la progression dans le localStorage
+function saveGame() {
+    const gameState = {
+        points: points,
+        currentBlockIndex: currentBlockIndex,
+        currentBackgroundIndex: currentBackgroundIndex,
+        currentTitleIndex: currentTitleIndex,
+        currentBlockNameIndex: currentBlockNameIndex,
+        currentMusicLevel: currentMusicLevel
+    };
+
+    saveGameStateClicker(gameState);
+    console.log('Progression sauvegardée');
+}
+
+// Fonction pour charger la progression depuis le localStorage
+function loadGame() {
+    const gameState = loadGameStateClicker();
+
+
+    if (gameState) {
+        points = gameState.points;
+        currentBlockIndex = gameState.currentBlockIndex;
+        currentBackgroundIndex = gameState.currentBackgroundIndex;
+        currentTitleIndex = gameState.currentTitleIndex;
+        currentBlockNameIndex = gameState.currentBlockNameIndex;
+        currentMusicLevel = gameState.currentMusicLevel;
+
+        console.log('Progression chargée');
+
+        updatePointsDisplay();
+        changeMusic();
+
+        // Mise à jour des éléments visuels comme tu le fais déjà très bien :
+        for (let i = 0; i < blockList.length; i++) {
+            const block = document.getElementById(blockList[i].id);
+            if (block) {
+                block.style.display = i === currentBlockIndex ? 'block' : 'none';
+            }
+        }
+        for (let i = 0; i < backgroundsList.length; i++) {
+            const background = document.querySelector(`#background-block-section img:nth-child(${i + 1})`);
+            if (background) {
+                background.style.display = i === currentBackgroundIndex ? 'block' : 'none';
+            }
+        }
+        for (let i = 0; i < titlesList.length; i++) {
+            const title = document.querySelector(`.titre-bg h1:nth-child(${i + 1})`);
+            if (title) {
+                title.style.display = i === currentTitleIndex ? 'block' : 'none';
+            }
+        }
+        for (let i = 0; i < blockNamesList.length; i++) {
+            const blockName = document.querySelector(`.nom-block h1:nth-child(${i + 1})`);
+            if (blockName) {
+                blockName.style.display = i === currentBlockNameIndex ? 'block' : 'none';
+            }
+        }
+    } else {
+        console.log('Aucune sauvegarde trouvée');
+    }
+}
+
+
+// Sauvegarder automatiquement la progression toutes les 10 secondes
+function setupAutoSave() {
+    setInterval(saveGame, 10000); // 10000 ms = 10 secondes
+}
+
+// Sauvegarder aussi avant que la page ne soit fermée
+window.addEventListener('beforeunload', saveGame);
+
+// Fonction pour gérer le clic sur les blocs
 function handleClick(event) {
     const pointsPerClick = calculatePointsPerClick();
     points += pointsPerClick;
@@ -101,9 +221,18 @@ function handleClick(event) {
     checkBackgroundUnlock(); // Vérifie le changement de fond
     checkTitleUnlock(); // Vérifie le changement de titre
     checkBlockNamesUnlock(); // Vérifie le changement du nom du bloc
-    trySpawnSpecialItem();
-}
 
+    // Appel à changeMusic() à chaque clic pour gérer la musique
+    changeMusic();
+
+    // Joue le son lors du clic
+    clickSound.play();
+
+    trySpawnSpecialItem();
+    
+    // Sauvegarder la progression après chaque clic
+    saveGame();
+}
 
 function calculatePointsPerClick() {
     return 1; // Valeur par défaut, tu peux adapter selon ta logique
@@ -159,6 +288,9 @@ function checkBlockUnlock() {
         }
 
         currentBlockIndex = nextBlockIndex;
+
+        // Joue le son de "level-up" quand un nouveau bloc est débloqué
+        levelUpSound.play();
     }
 
     // Rétablir un bloc précédent si points < seuil du bloc actuel
@@ -180,6 +312,7 @@ function checkBlockUnlock() {
         currentBlockIndex = previousBlockIndex;
     }
 }
+
 
 // Vérifie si on doit changer de fond ou rétablir un fond précédent
 function checkBackgroundUnlock() {
@@ -343,6 +476,7 @@ function trySpawnSpecialItem() {
     });
 }
 
+
 // Fonction pour spawner un item spécial toutes les 5 secondes
 function startRandomItemSpawner() {
     setInterval(() => {
@@ -355,14 +489,39 @@ function startRandomItemSpawner() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    startRandomItemSpawner();
+    // Définition des volumes au chargement de la page
+    clickSound.volume = 0.3;
+    levelUpSound.volume = 0.4;
+    overworldMusic.volume = 0.1;
+    caveMusic.volume = 0.1;
+    netherMusic.volume = 0.1;
+
+    // Charger la sauvegarde si elle existe
+    loadGame();
+    
+    // // Configurer la sauvegarde automatique
+    setupAutoSave();
+    
+    function startMusicOnce() {
+        if (currentMusicLevel === 'overworld') {
+            overworldMusic.play();
+        } else if (currentMusicLevel === 'cave') {
+            caveMusic.play();
+        } else if (currentMusicLevel === 'nether') {
+            netherMusic.play();
+        }
+    
+        // Supprime le listener une fois la musique lancée
+        document.removeEventListener('click', startMusicOnce);
+    }
+    
+    document.addEventListener('click', startMusicOnce);
+
+    startRandomItemSpawner();  // Autres initialisations
     const clickTarget = document.getElementById('click-button');
     if (clickTarget) {
         clickTarget.addEventListener('click', handleClick);
     }
 
     updatePointsDisplay(); // Affiche les points initiaux
-    checkTitleUnlock(); // Vérifie le changement de titre au démarrage
-    checkBlockNamesUnlock(); // Vérifie le changement du nom du bloc au démarrage
 });
-
