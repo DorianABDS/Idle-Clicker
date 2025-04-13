@@ -5,16 +5,13 @@
     font-style: normal;
 }
 
-.navbar ul {
-    display: flex;
-    position: absolute;
-    right: 10px;
-    top: 0;
-}
 
 .navbar ul {
     display: flex;
-    justify-content: flex-end;
+    position: absolute;
+    right: 0;
+    top: 0;
+
 
     li {
         position: relative;
@@ -34,14 +31,14 @@
 
 #block-section {
     position: relative;
-    width: 30%;
+    width: 30%; /* Réduit de 50% à 30% */
     height: 100%;
     overflow: hidden;
 }
 
 #main-section {
     position: relative;
-    width: 70%;
+    width: 70%; /* Augmenté de 50% à 70% */
     height: 100%;
     overflow: hidden;
 }
@@ -72,7 +69,7 @@
     height: 100%;
 }
 
-#points-display {
+#points-display{
     position: absolute;
     z-index: 10000;
     font-family: 'MinecraftRegular', cursive;
@@ -83,16 +80,17 @@
     justify-content: center;
     top: 25%;
     width: 100%;
+    align-items: center;
     background-color: #0000005f;
-    padding: 15px 0;
+    padding: 15px 0 ;
 }
 
-.gif-emerald {
+.gif-emerald{
     height: auto;
     width: 15%;
 }
 
-.block {
+.block{
     position: absolute;
     z-index: 10000;
     height: auto;
@@ -101,7 +99,7 @@
     left: 23%;
 }
 
-.craft-table-bonus {
+.craft-table-bonus{
     position: absolute;
     z-index: 10000000;
     top: 17%;
@@ -112,12 +110,12 @@
     width: 40%;
 }
 
-.img-craft-bonus {
+.img-craft-bonus{
     box-shadow: 0 0 10px 5px #ffffffb3;
     background-color: #a9a9a95f;
 }
 
-.vilage-bonus {
+.vilage-bonus{
     position: absolute;
     z-index: 100000;
     gap: 50px;
@@ -128,36 +126,35 @@
     left: 35%;
     top: 15%;
 }
-
-.img-village-bonus {
+.img-village-bonus{
     height: 50%;
     width: auto;
     box-shadow: 0 0 10px 5px #ffffffb3;
     background-color: #a9a9a95f;
 }
 
-.potion-bonus {
+.potion-bonus{
     position: absolute;
     z-index: 10000000;
     gap: 15px;
     top: 65%;
     right: 1.5em;
     display: flex;
+
+    img{
+        height: 10%;
+        width: auto;
+    }
 }
 
-.potion-bonus img {
-    height: 10%;
-    width: auto;
-}
-
-.titre-bg {
+.titre-bg{
     position: absolute;
     z-index: 100000;
     top: 10%;
     left: 15%;
 }
 
-.titre {
+.titre{
     color: white;
     font-family: 'MinecraftRegular', cursive;
     font-size: 50px;
@@ -166,32 +163,18 @@
     border-radius: 100px;
 }
 
-.nom-block {
+.nom-block{
     position: absolute;
     z-index: 100000;
     top: 80%;
     left: 20%;
 }
 
-.h1-nom-block {
+.h1-nom-block{
     color: white;
     font-family: 'MinecraftRegular', cursive;
     font-size: 50px;
     background-color: #0000005f;
     padding: 0.3em 1.5em;
     border-radius: 100px;
-}
-
-.active {
-    display: block;
-}
-
-.hidden {
-    display: none;
-}
-
-.navbar li.tab-active {
-    transform: scale(1.2);
-    transition: transform 0.3s ease;
-    z-index: 10;
 }
