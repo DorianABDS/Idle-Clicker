@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobTab = document.getElementById('mob-tab');
     const potionTab = document.getElementById('potion-tab');
 
+    // Vérifier si les éléments existent
+    if (!pickaxeTab || !mobTab || !potionTab) {
+        console.error("Certains onglets n'ont pas été trouvés");
+        return;
+    }
+
     // Sélection des images à afficher pour chaque catégorie
     const craftTableImgs = document.querySelectorAll('.craft-table-bonus img');
     const villageImgs = document.querySelectorAll('.vilage-bonus img');
@@ -17,17 +23,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const villageImg = document.getElementById('village');
     const alambicImg = document.getElementById('alambic');
 
-    // Activer tous les onglets
-    [pickaxeTab, mobTab, potionTab].forEach(tab => tab.classList.add('tab-active'));
+    // Vérifier si les images existent
+    if (!craftTableImg || !villageImg || !alambicImg) {
+        console.error("Certaines images de fond n'ont pas été trouvées");
+        return;
+    }
 
-    // Fonction pour masquer une liste d’images
+    // Ajouter des classes d'onglet actif pour le style
+    [pickaxeTab, mobTab, potionTab].forEach(tab => {
+        tab.classList.add('tab-active');
+        
+        // Ajouter du style pour la transition
+        tab.style.transition = 'transform 0.3s ease-in-out';
+        tab.style.cursor = 'pointer';
+    });
+
+    // Fonction pour masquer une liste d'images
     function hideImages(imgList) {
         imgList.forEach(img => img.style.display = 'none');
     }
 
-    // Fonction pour afficher une liste d’images
+    // Fonction pour afficher une liste d'images
     function showImages(imgList) {
-        imgList.forEach(img => img.style.display = 'inline-block');
+        imgList.forEach(img => img.style.display = 'block');
     }
 
     // Fonction principale d'activation d'un onglet
@@ -40,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             t.style.zIndex = '1';
         });
 
-        // Zoom l’onglet actif
+        // Zoom l'onglet actif
         tab.style.transform = 'scale(1.2)';
         tab.style.zIndex = '10';
 
@@ -60,21 +78,21 @@ document.addEventListener('DOMContentLoaded', function () {
         backgroundImg.style.display = 'block';
     }
 
-    // Écouteurs d’événements sur les onglets
-    pickaxeTab.onclick = function () {
+    // Écouteurs d'événements sur les onglets
+    pickaxeTab.addEventListener('click', function() {
         console.log("Clic sur onglet Pioche");
         activateTab(pickaxeTab, craftTableImgs, craftTableImg);
-    };
+    });
 
-    mobTab.onclick = function () {
+    mobTab.addEventListener('click', function() {
         console.log("Clic sur onglet Villageois");
         activateTab(mobTab, villageImgs, villageImg);
-    };
+    });
 
-    potionTab.onclick = function () {
+    potionTab.addEventListener('click', function() {
         console.log("Clic sur onglet Potion");
         activateTab(potionTab, potionImgs, alambicImg);
-    };
+    });
 
     // Onglet pioche activé par défaut
     activateTab(pickaxeTab, craftTableImgs, craftTableImg);
