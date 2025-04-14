@@ -86,7 +86,7 @@ const specialItems = [
       // Pas de bonus pour le creeper, juste éviter le malus
     },
     onTimeout: () => {
-      const percentageToRemove = 10; // Retirer 10% des points actuels
+      const percentageToRemove = 3; // Retirer 10% des points actuels
       const pointsToRemove = Math.round(points * (percentageToRemove / 100));
       subtractPoints(pointsToRemove);
       showFeedbackMessage(`-${pointsToRemove} points !`, "red");
@@ -154,6 +154,9 @@ function initGame() {
   
   document.addEventListener("click", startMusicOnce);
 
+  // Ajouter les styles pour les items spéciaux
+  addSpecialItemsStyles();
+
   // Démarrer le générateur d'items aléatoires
   startRandomItemSpawner();
   
@@ -168,6 +171,48 @@ function initGame() {
 
   // Mettre à jour l'affichage initial
   updatePointsDisplay();
+}
+
+// Fonction pour ajouter les styles CSS pour les items spéciaux
+function addSpecialItemsStyles() {
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    .special-item {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      cursor: pointer;
+      z-index: 10000000000000000000;
+      transition: transform 0.2s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    
+    .special-item:hover {
+      transform: scale(1.1);
+    }
+    
+    .click-feedback {
+      position: absolute;
+      color: #ffffff;
+      font-weight: bold;
+      pointer-events: none;
+      animation: fadeUp 1s forwards;
+      text-shadow: 0 0 3px #000;
+      font-size: 18px;
+    }
+    
+    .feedback-message {
+      font-size: 24px;
+      font-weight: bold;
+      text-shadow: 0 0 3px #000;
+      z-index: 10000000000000000;
+    }
+    
+    @keyframes fadeUp {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-30px); }
+    }
+  `;
+  document.head.appendChild(styleSheet);
 }
 
 // Fonction pour mettre à jour l'affichage des points
@@ -492,7 +537,7 @@ function showFeedbackMessage(message, color) {
   }, 2000);
 }
 
-// Fonctions pour les items spéciaux
+// Fonction pour faire apparaître les items spéciaux
 function trySpawnSpecialItem() {
   specialItems.forEach((item) => {
     if (Math.random() < item.chance) {
@@ -500,43 +545,87 @@ function trySpawnSpecialItem() {
       img.src = item.src;
       img.className = "special-item";
       img.id = item.id;
+      
+      // Définir une taille plus petite pour les images spéciales
+      img.style.width = "60px";  // Taille réduite
+      img.style.height = "60px"; // Taille réduite
+      img.style.position = "absolute";
+      img.style.cursor = "pointer"; // Curseur pointeur pour indiquer que c'est cliquable
+      img.style.zIndex = "1000"; // S'assurer qu'il est au-dessus des autres éléments
 
       let wasClicked = false;
 
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 120);
+      // Marges pour éviter que les items apparaissent trop près des bords
+      const margin = 80;
+      
+      // Calculer une position aléatoire en respectant les marges
+      const x = margin + Math.random() * (window.innerWidth - 2 * margin);
+      const y = margin + Math.random() * (window.innerHeight - 2 * margin);
+      
       img.style.left = `${x}px`;
       img.style.top = `${y}px`;
 
       document.body.appendChild(img);
 
+      // Ajouter un effet d'apparition
+      img.style.opacity = "0";
+      img.style.transition = "opacity 0.3s ease-in-out";
+      
+      // Délai court pour permettre au navigateur de traiter l'ajout de l'élément
+      setTimeout(() => {
+        img.style.opacity = "1";
+      }, 50);
+
       img.addEventListener("click", () => {
         if (!wasClicked) {
           wasClicked = true;
-          item.onClick();
-          img.remove();
+          // Ajouter un effet de clic
+          img.style.transform = "scale(1.2)";
+          img.style.opacity = "0";
+          
+          setTimeout(() => {
+            item.onClick();
+            img.remove();
+          }, 300);
         }
       });
 
+      // Délai avant disparition
       setTimeout(() => {
         if (!wasClicked) {
-          item.onTimeout();
-          img.remove();
+          // Animation de disparition
+          img.style.opacity = "0";
+          
+          setTimeout(() => {
+            item.onTimeout();
+            img.remove();
+          }, 300);
         }
       }, 3000);
     }
   });
 }
 
-// Fonction pour spawner des items spéciaux régulièrement
+// Fonction pour générer des items spéciaux à intervalles réguliers
 function startRandomItemSpawner() {
-  setInterval(() => {
+  // Vérifier s'il existe déjà un intervalle pour éviter les duplications
+  if (window.itemSpawnerInterval) {
+    clearInterval(window.itemSpawnerInterval);
+  }
+  
+  // Créer un nouvel intervalle et le stocker dans une variable globale
+  window.itemSpawnerInterval = setInterval(() => {
+    // Pour chaque type d'item, tenter de le faire apparaître
     specialItems.forEach((item) => {
       if (Math.random() < item.chance) {
-        trySpawnSpecialItem();
+        // Vérifier si un item du même type est déjà présent
+        const existingItem = document.getElementById(item.id);
+        if (!existingItem) {
+          trySpawnSpecialItem();
+        }
       }
     });
-  }, 5000);
+  }, 5000); // Toutes les 5 secondes
 }
 
 // Système de clics automatiques
@@ -765,6 +854,7 @@ function addResetButton() {
     resetButton.style.borderRadius = '5px';
     resetButton.style.cursor = 'pointer';
     resetButton.style.fontWeight = 'bold';
+    resetButton.style.zIndex = '10000000000';
     
     // Ajouter un effet de survol
     resetButton.addEventListener('mouseover', function() {

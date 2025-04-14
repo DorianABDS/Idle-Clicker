@@ -282,6 +282,7 @@ function applyAutoClickBoost(multiplier, duration) {
 // Initialiser l'auto-clicker quand la page est chargée
 document.addEventListener('DOMContentLoaded', initAutoClicker);
 
+
 // Exposer les fonctions qui pourraient être nécessaires pour d'autres parties du jeu
 window.autoClicker = {
     buyMob,
